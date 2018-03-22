@@ -1,5 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<H1>{{ hello}} </H1>
+
+<head>
+    <title>
+        Products</title>
+</head>
+
+<H1>{{ products }} </H1>
+
+<body>
+</body>
+
 </html>

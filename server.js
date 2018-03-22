@@ -4,7 +4,7 @@ const hndl = require("express-handlebars");
 const app = express();
 const DS_articles = require("./db/articles.js");
 const DS_products = require("./db/products.js");
-const productList = [];
+
 var products = require("./routes/products");
 var articles = require("./routes/articles");
 
