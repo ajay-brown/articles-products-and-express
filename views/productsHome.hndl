@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Products</title>
+</head>
+
+<H1>Products </H1>
+<ul>
+    {{#each products}}
+    <li>
+        <a href="/products/{{id}}">{{ name }} </a>
+    </li>
+    {{/each}}
+</ul>
+
+<body>
+</body>
+
+</html>

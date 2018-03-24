@@ -1,38 +1,53 @@
 var express = require("express");
 var router = express.Router();
 const bp = require("body-parser");
-let id = 1;
 const productList = [];
 const DS_products = require("../db/products.js");
 
 router.get("/", (req, res) => {
-  res.render("home", { products: displayList });
-});
-//GET /products displays all products added thus far
-//GET /products/:id displays product of given id
-//GET /products/:id/edit will edit the product
-//GET /products/new creat enew form to add product
-router.post("/", (req, res) => {
-  //POST to create new product, will redirect user to /products route
-  let newProd = req.body;
+  let products = DS_products.getAllProducts();
 
-  newProd.id = id;
-  DS_products.addNewProduct(newProd.name, newProd.price, newProd.inventory);
-  console.log(newProd);
-  // DS_products.console.log("this is", productList);
-  //displayList = JSON.stringify(productList);
-  id++;
-
-  res.end();
-  return id;
+  res.render("productsHome", { products });
 });
+
+router.get("/:id", (req, res) => {
+  let productId = Number(req.params.id);
+  let retrievedProduct = DS_products.getProductById(productId);
+  console.log(retrievedProduct);
+  res.render("product", retrievedProduct);
+});
+
 router.get("/new", (req, res) => {
   res.render("layouts/new");
 });
+
+router.get("/:id/edit", (req, res) => {
+  productId = Number(req.params.id);
+  let retrievedProduct = DS_products.getProductById(productId);
+  res.render("layouts/productEdit", retrievedProduct);
+});
+
+router.post("/", (req, res) => {
+  let newProd = req.body;
+  DS_products.addNewProduct(newProd.name, newProd.price, newProd.inventory);
+  res.render("productsHome", { products });
+  res.end();
+});
+
 router.put("/:id", (req, res) => {
   let productId = Number(req.params.id);
-  console.log(productId);
-  console.log(typeof productList);
+  let retrievedProduct = DS_products.getProductById(productId);
+  console.log(retrievedProduct);
+  let request = req.body;
+  if (retrievedProduct.name != request.name) {
+    retrievedProduct.name = request.name;
+    console.log("name changed", retrievedProduct);
+  } else if (retrievedProduct.price != request.price) {
+    retrievedProduct.price = request.price;
+  } else if (retrievedProduct.inventory != request.inventory) {
+    retrievedProduct.inventory != request.inventory;
+  }
+  res.render("product", retrievedProduct);
   res.end();
 });
 
