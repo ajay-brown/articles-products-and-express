@@ -39,16 +39,26 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   let productId = Number(req.params.id);
+  console.log("editable");
+  console.log("req body", req.body);
   let retrievedProduct = DS_products.getProductById(productId);
   console.log(retrievedProduct);
   let request = req.body;
   if (retrievedProduct.name != request.name) {
     retrievedProduct.name = request.name;
     console.log("name changed", retrievedProduct);
-  } else if (retrievedProduct.price != request.price) {
+  } else {
+    retrievedProduct.name = retrievedProduct.name;
+  }
+  if (retrievedProduct.price != request.price) {
     retrievedProduct.price = request.price;
-  } else if (retrievedProduct.inventory != request.inventory) {
+  } else {
+    retrievedProduct.price = retrievedProduct.price;
+  }
+  if (retrievedProduct.inventory != request.inventory) {
     retrievedProduct.inventory = request.inventory;
+  } else {
+    retrievedProduct.inventory = retrievedProduct.inventory;
   }
   let products = DS_products.getAllProducts();
   console.log(products);

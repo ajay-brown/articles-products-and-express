@@ -18,7 +18,14 @@ app.engine(
   })
 );
 app.set("view engine", "hndl");
-app.use(methodOverride(req => req.body._method));
+// app.use(
+//   methodOverride(req => {
+//     console.log("methodoverride", req.body);
+//     console.log(req.body._method);
+//     // req.body._method)
+//   })
+// );
+app.use(methodOverride("_method"));
 app.put("/product");
 
 app.get("/", (req, res) => {
