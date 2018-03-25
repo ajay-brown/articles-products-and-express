@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <title>
         Products</title>
 </head>
 
+<body></body>
 <H1>Products </H1>
 <ul>
     {{#each products}}
@@ -15,7 +13,5 @@
     {{/each}}
 </ul>
 
-<body>
+{{> nav}}
 </body>
-
-</html>

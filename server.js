@@ -17,11 +17,13 @@ app.engine(
   })
 );
 app.set("view engine", "hndl");
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: __dirname });
+  res.end();
+});
 app.use("/products", products);
 //app.use("/articles", articles);
 
-//PUT with products/:id to edit a product with give id
-//DELETE with products/:id to delete a product with id
 app.listen(8080, () => {
   console.log("Server listening on port 8080");
 });
