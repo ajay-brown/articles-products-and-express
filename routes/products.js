@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const productList = [];
 const DS_products = require("../db/products.js");
+const methodOverride = require("method-override");
 
 router.get("/", (req, res) => {
   let products = DS_products.getAllProducts();
@@ -10,7 +11,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  console.log("new");
+  //must be before /:id
+
   res.render("new");
 });
 
@@ -18,7 +20,6 @@ router.get("/:id", (req, res) => {
   let productId = Number(req.params.id);
   let retrievedProduct = DS_products.getProductById(productId);
   console.log(retrievedProduct);
-  console.log("id path");
   res.render("product", retrievedProduct);
 });
 
@@ -47,11 +48,22 @@ router.put("/:id", (req, res) => {
   } else if (retrievedProduct.price != request.price) {
     retrievedProduct.price = request.price;
   } else if (retrievedProduct.inventory != request.inventory) {
-    retrievedProduct.inventory != request.inventory;
+    retrievedProduct.inventory = request.inventory;
   }
+  let products = DS_products.getAllProducts();
+  res.render("productsHome", { products });
   // res.render("product", retrievedProduct);
   // if (err) res.render("layouts/productEdit", { alert: "error!" });
   // res.end();
+});
+router.delete("/:id", (req, res) => {
+  let productId = Number(req.params.id);
+  console.log("prod id", productId);
+  let deletedProduct = DS_products.deleteProductById(productId);
+  console.log("deleted", deletedProduct);
+  let products = DS_products.getAllProducts();
+  console.log("new product list", products);
+  res.render("productsHome", { products });
 });
 
 module.exports = router;

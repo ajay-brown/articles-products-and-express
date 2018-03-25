@@ -4,11 +4,12 @@ const hndl = require("express-handlebars");
 const app = express();
 const DS_articles = require("./db/articles.js");
 const DS_products = require("./db/products.js");
+const methodOverride = require("method-override");
 
 var products = require("./routes/products");
 var articles = require("./routes/articles");
 
-app.use(bp.urlencoded({ extended: false }));
+app.use(bp.urlencoded({ extended: true }));
 app.engine(
   "hndl",
   hndl({

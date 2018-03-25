@@ -28,11 +28,12 @@ class DS_products {
     return result;
   }
   deleteProductById(id) {
-    this.list.splice().forEach((product, index) => {
+    this.list.forEach((product, index) => {
       if (product.id === id) {
         this.list.splice(index, 1);
       }
     });
+    return this.list;
   }
 }
 module.exports = new DS_products();

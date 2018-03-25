@@ -64,10 +64,20 @@
             margin-left: .5em;
         }
     </style>
+    <script>
+        function editID() {
+            let idSelector = window.location.pathname.split("/").pop().pop();
+            console.log(window.location.pathname);
+            let action_src = "http://localhost:8080/products/" + idSelector;
+            console.log(idSelector);
+            let form = document.getElementById("editForm");
+            form.action = action_src;
+        }
+    </script>
 </head>
 
 <body>
-    <form action="/products/:id" method="post">
+    <form id="editForm" onsubmit="editID()">
         <h1> {{ alert }} </h1>
         <div>
             <label for="name">Product Name:</label>
