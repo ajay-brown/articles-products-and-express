@@ -65,34 +65,34 @@
         }
     </style>
     <script>
-        function editID() {
-            let idSelector = window.location.pathname.split("/").pop().pop();
-            console.log(window.location.pathname);
-            let action_src = "http://localhost:8080/products/" + idSelector;
-            console.log(idSelector);
-            let form = document.getElementById("editForm");
-            form.action = action_src;
-        }
+        // function editID() {
+        //     let idSelector = window.location.pathname.split("/").pop().pop();
+        //     console.log(window.location.pathname);
+        //     let action_src = "http://localhost:8080/products/" + idSelector;
+        //     console.log(idSelector);
+        //     let form = document.getElementById("editForm");
+        //     form.action = action_src;
+        // }
     </script>
 </head>
 
 <body>
-    <form id="editForm" onsubmit="editID()">
+    <form id="editForm" enctype="application/x-www-form-urlencoded" action "/product/:id/_method=PUT">
         <h1> {{ alert }} </h1>
         <div>
-            <label for="name">Product Name:</label>
-            <input type="text" id="name" name="name"> {{name }}
+            <label for="name ">Product Name:</label>
+            <input type="text " id="name " name="name "> {{ name }}
         </div>
         <div>
-            <label for="price">Product Price:$</label>
-            <input type="number" id="price" name="price"> {{ price }}
+            <label for="price ">Product Price:$</label>
+            <input type="number " id="price " name="price "> {{ price }}
         </div>
         <div>
-            <label for="inventory">Product Inventory:</label>
-            <input type="number" id="inventory" name="inventory"> {{ inventory }}
+            <label for="inventory ">Product Inventory:</label>
+            <input type="number " id="inventory " name="inventory "> {{ inventory }}
         </div>
-        <div class="button">
-            <button type="submit" onclick="location.href='http://localhost/products';" value="to Products page">Submit</button>
+        <div class="button ">
+            <button type="submit " onclick="location.href='http://localhost/products' ; " value="to Products page ">Submit</button>
         </div>
     </form>
     {{> nav}}

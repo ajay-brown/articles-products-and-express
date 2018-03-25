@@ -51,6 +51,7 @@ router.put("/:id", (req, res) => {
     retrievedProduct.inventory = request.inventory;
   }
   let products = DS_products.getAllProducts();
+  console.log(products);
   res.render("productsHome", { products });
   // res.render("product", retrievedProduct);
   // if (err) res.render("layouts/productEdit", { alert: "error!" });

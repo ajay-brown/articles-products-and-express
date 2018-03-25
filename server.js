@@ -18,6 +18,9 @@ app.engine(
   })
 );
 app.set("view engine", "hndl");
+app.use(methodOverride(req => req.body._method));
+app.put("/product");
+
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: __dirname });
   res.end();
