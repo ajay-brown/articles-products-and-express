@@ -27,13 +27,13 @@ app.set("view engine", "hndl");
 // );
 app.use(methodOverride("_method"));
 app.put("/product");
+app.put("/articles");
 
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: __dirname });
-  res.end();
 });
 app.use("/products", products);
-//app.use("/articles", articles);
+app.use("/articles", articles);
 
 app.listen(8080, () => {
   console.log("Server listening on port 8080");

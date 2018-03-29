@@ -11,5 +11,6 @@
     <p> {{ price }} </p>
     <p> In Stock:</p>
     <p> {{ inventory }}</p>
-    {{> nav}}
+    {{> edit}}
+    <br> {{> nav}}
 </body>

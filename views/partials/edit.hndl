@@ -1,2 +1,7 @@
 <br>
-<a href="/products/:id/edit"> Edit Product</a>
+<script>
+    let urlVal = window.location.pathname.split("/");
+    console.log(urlVal);
+    console.log("HI")
+</script>
+<a href="/products/1/edit"> Edit Product</a>

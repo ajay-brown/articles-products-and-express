@@ -27,6 +27,21 @@ class DS_products {
 
     return result;
   }
+  editProductById(id, name, price, inventory) {
+    let newProd = {};
+
+    this.list.forEach(product => {
+      if (product.id === id) {
+        console.log(product.id, "this is id");
+        newProd = product;
+        newProd.name = product.name; //updating new product values via overwriting
+        newProd.price = product.price;
+        newProd.inventory = product.inventory;
+        console.log("newProd", newProd);
+      }
+    });
+    return newProd;
+  }
   deleteProductById(id) {
     this.list.forEach((product, index) => {
       if (product.id === id) {
