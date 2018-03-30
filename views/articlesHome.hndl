@@ -1,0 +1,17 @@
+<head>
+    <title>
+        Products</title>
+</head>
+
+<body></body>
+<H1>Articles </H1>
+<ul>
+    {{#each articles}}
+    <li>
+        <a href="/articles/{{title}}">{{ title }} </a>
+    </li>
+    {{/each}}
+</ul>
+
+{{> nav}}
+</body>

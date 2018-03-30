@@ -7,7 +7,7 @@ class DS_articles {
       title,
       body,
       author,
-      urlTitle: encodeURLComponent(title)
+      urlTitle: encodeURIComponent(title)
     });
     return this.list;
   }
@@ -27,10 +27,10 @@ class DS_articles {
     let newArticle = {};
     this.list.forEach(article => {
       if (article.title === title) {
-        newArticle.title = article.title;
-        newArticle.body = article.body;
-        newArticle.author = article.author;
-        newArticle.urlTitle = encodeURLComponent(newArticle.title);
+        article.title = newArticle.title;
+        article.body = newArticle.body;
+        article.author = newArticle.author;
+        newArticle.urlTitle = encodeURIComponent(newArticle.title);
       }
     });
     return newArticle;

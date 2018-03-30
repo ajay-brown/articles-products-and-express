@@ -1,6 +1,13 @@
 <br>
 <a href="/products"> Products Homepage</a>
 <br>
+<a href="/articles"> Articles Homepage</a>
+<br>
+<br>
 <a href="/products/new">Add a New Product</a>
+<br>
+
+<a href="/articles/new">Add a New Articles</a>
+<br>
 <br>
 <a href="/"> Products/Articles Homepage</a>
