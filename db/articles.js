@@ -24,7 +24,7 @@ class DS_articles {
     return result;
   }
   editArticleByTitle(title, body, author) {
-    let newArticle = {};
+    let updatedArticle = {};
     this.list.forEach(article => {
       if (article.title === title) {
         article.title = newArticle.title;
@@ -33,7 +33,7 @@ class DS_articles {
         newArticle.urlTitle = encodeURIComponent(newArticle.title);
       }
     });
-    return newArticle;
+    return updatedArticle;
   }
   deleteArticleByTitle(title) {
     this.list.forEach((article, index) => {

@@ -1,8 +1,18 @@
 var express = require("express");
 var router = express.Router();
 const productList = [];
-const DS_articles = require("../db/articles.js");
+// const DS_articles = require("../db/articles.js");
 const methodOverride = require("method-override");
+
+var knex = require("knex")({
+  client: "pg",
+  connection: {
+    host: "127.0.0.1",
+    user: "articles_user",
+    password: "password",
+    database: "articles_db"
+  }
+});
 
 router.get("/", (req, res) => {
   let articles = DS_articles.getAllArticles();

@@ -2,8 +2,8 @@ const express = require("express");
 const bp = require("body-parser");
 const hndl = require("express-handlebars");
 const app = express();
-const DS_articles = require("./db/articles.js");
-const DS_products = require("./db/products.js");
+// const DS_articles = require("./db/articles.js");
+// const DS_products = require("./db/products.js");
 const methodOverride = require("method-override");
 
 var products = require("./routes/products");
