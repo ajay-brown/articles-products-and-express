@@ -30,14 +30,20 @@ class DS_articles {
       return data.rows; //returning promise object
     });
   }
-  getArticleByTitle(title) {
-    let result = '';
-    this.list.forEach(article => {
-      if (article.title === title) {
-        result = article;
-      }
-    });
-    return result;
+  getArticleByTitle(id) {
+    // let result = '';
+    // this.list.forEach(article => {
+    //   if (article.title === title) {
+    //     result = article;
+    //   }
+    // });
+    // return result;
+    return knex
+      .raw(`SELECT * FROM articles WHERE article_id = ${id}`)
+      .then(data => {
+        // console.log(data, 'data');
+        return data.rows; //returning promise object
+      });
   }
   editArticleByTitle(title, body, author) {
     let updatedArticle = {};

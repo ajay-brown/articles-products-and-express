@@ -8,13 +8,23 @@ router.get('/', (req, res) => {
   console.log('articles route');
   DS_articles.getAllArticles()
     .then(articles => {
-      console.log(articles); //article title
+      console.log(articles, 'dis is articles');
       res.render('articlesHome', { articles });
     })
     .catch(err => console.log(err, 'ERROR'));
   // console.log("articles route");
   // let articles = knex.raw("SELECT * FROM articles");
   // console.log(articles);
+});
+router.get('/:id', (req, res) => {
+  //retrieved product by ID
+  let articleId = Number(req.params.id);
+  DS_articles.getArticleByTitle(articleId)
+    .then(retrievedArticle => {
+      console.log(retrievedArticle);
+      res.render('articles', { retrievedArticle });
+    })
+    .catch(err => console.log(err, 'ERROR'));
 });
 
 router.post('/', (req, res) => {
