@@ -1,3 +1,16 @@
+var knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user: 'articles_user',
+    password: 'password',
+    database: 'articles_db'
+  }
+});
+// knex.raw('SELECT * from articles').then(data => {
+//   console.log('data', data)
+//   ;
+// });
 class DS_articles {
   constructor() {
     this.list = [];
@@ -12,10 +25,13 @@ class DS_articles {
     return this.list;
   }
   getAllArticles() {
-    return this.list;
+    //return this.list;
+    return knex.raw('SELECT * from articles').then(data => {
+      return data.rows; //returning promise object
+    });
   }
   getArticleByTitle(title) {
-    let result = "";
+    let result = '';
     this.list.forEach(article => {
       if (article.title === title) {
         result = article;

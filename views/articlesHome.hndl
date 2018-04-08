@@ -8,7 +8,7 @@
 <ul>
     {{#each articles}}
     <li>
-        <a href="/articles/{{title}}">{{ title }} </a>
+        <a href="/articles/{{title}}">{{ this.article_title }} </a>
     </li>
     {{/each}}
 </ul>

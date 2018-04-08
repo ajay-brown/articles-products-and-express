@@ -4,7 +4,7 @@ CREATE USER articles_user WITH ENCRYPTED PASSWORD 'password';
 CREATE DATABASE articles_db OWNER articles_user;
 
 \c articles_db;
-
+SET ROLE articles_user;
 CREATE TABLE articles (
     article_id SERIAL NOT NULL PRIMARY KEY,
     article_title VARCHAR(155),
@@ -12,7 +12,7 @@ CREATE TABLE articles (
     author VARCHAR(25)
 );
 
-GRANT ALL PRIVILEGES ON TABLE articles TO articles_user;
+
 
 INSERT INTO articles (article_title, body, author)
 VALUES

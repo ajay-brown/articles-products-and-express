@@ -4,16 +4,6 @@ const productList = [];
 const DS_products = require("../db/products.js");
 const methodOverride = require("method-override");
 
-var knex = require("knex")({
-  client: "pg",
-  connection: {
-    host: "127.0.0.1",
-    user: "products_user",
-    password: "password",
-    database: "products_db"
-  }
-});
-
 router.get("/", (req, res) => {
   let products = DS_products.getAllProducts();
 
@@ -98,3 +88,4 @@ router.delete("/:id", (req, res) => {
 });
 
 module.exports = router;
+// module.exports = knex();

@@ -4,7 +4,7 @@ CREATE USER products_user WITH ENCRYPTED PASSWORD 'password';
 CREATE DATABASE products_db OWNER products_user;
 
 \c products_db;
-
+SET ROLE products_user;
 CREATE TABLE products (
     product_id SERIAL NOT NULL PRIMARY KEY,
     product_name VARCHAR(25),
