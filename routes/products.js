@@ -1,51 +1,56 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 const productList = [];
-const DS_products = require("../db/products.js");
-const methodOverride = require("method-override");
+const DS_products = require('../db/products.js');
+const methodOverride = require('method-override');
 
-router.get("/", (req, res) => {
-  let products = DS_products.getAllProducts();
-
-  res.render("productsHome", { products });
+router.get('/', (req, res) => {
+  DS_products.getAllProducts()
+    .then(products => {
+      res.render('productsHome', { products });
+    })
+    .catch(err => console.log(err, 'ERROR'));
 });
 
-router.get("/new", (req, res) => {
+router.get('/new', (req, res) => {
   //must be before /:id
 
-  res.render("new");
+  res.render('new');
 });
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   //retrieved product by ID
   let productId = Number(req.params.id);
-  let retrievedProduct = DS_products.getProductById(productId);
-  console.log(retrievedProduct);
-  res.render("product", retrievedProduct);
+  DS_products.getProductById(productId)
+    .then(retrievedProduct => {
+      console.log(retrievedProduct);
+      res.render('product', { retrievedProduct });
+    })
+    .catch(err => console.log(err, 'error'));
 });
 
-router.get("/:id/edit", (req, res) => {
+router.get('/:id/edit', (req, res) => {
   //edit form
   productId = Number(req.params.id);
   let retrievedProduct = DS_products.getProductById(productId);
-  res.render("productEdit", retrievedProduct);
+  res.render('productEdit', retrievedProduct);
 });
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   //for new products
   let newProd = req.body;
   DS_products.addNewProduct(newProd.name, newProd.price, newProd.inventory);
   let products = DS_products.getAllProducts();
-  console.log("updated", products);
-  res.render("productsHome", { products });
+  console.log('updated', products);
+  res.render('productsHome', { products });
 });
 
-router.put("/:id/edit", (req, res) => {
+router.put('/:id/edit', (req, res) => {
   //to edit
   let productId = Number(req.params.id);
   let requestedProduct = DS_products.getProductById(productId);
-  console.log("editable");
-  console.log("req product", requestedProduct);
+  console.log('editable');
+  console.log('req product', requestedProduct);
   let retrievedProduct = DS_products.editProductById(
     productId,
     requestedProduct.name,
@@ -72,19 +77,19 @@ router.put("/:id/edit", (req, res) => {
   // }
   let products = DS_products.getAllProducts(); //to display again
   console.log(products);
-  res.render("productsHome", { products });
+  res.render('productsHome', { products });
   // res.render("product", retrievedProduct);
   // if (err) res.render("layouts/productEdit", { alert: "error!" });
   // res.end();
 });
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
   let productId = Number(req.params.id);
-  console.log("prod id", productId);
+  console.log('prod id', productId);
   let deletedProduct = DS_products.deleteProductById(productId);
-  console.log("deleted", deletedProduct);
+  console.log('deleted', deletedProduct);
   let products = DS_products.getAllProducts();
-  console.log("new product list", products);
-  res.render("productsHome", { products });
+  console.log('new product list', products);
+  res.render('productsHome', { products });
 });
 
 module.exports = router;

@@ -8,7 +8,7 @@
 <ul>
     {{#each products}}
     <li>
-        <a href="/products/{{id}}">{{ name }} </a>
+        <a href="/products/{{this.product_id}}">{{ this.product_name }} </a>
     </li>
     {{/each}}
 </ul>
