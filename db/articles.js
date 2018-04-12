@@ -1,3 +1,16 @@
+var knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user: 'articles_user',
+    password: 'password',
+    database: 'articles_db'
+  }
+});
+// knex.raw('SELECT * from articles').then(data => {
+//   console.log('data', data)
+//   ;
+// });
 class DS_articles {
   constructor() {
     this.list = [];
@@ -12,19 +25,28 @@ class DS_articles {
     return this.list;
   }
   getAllArticles() {
-    return this.list;
-  }
-  getArticleByTitle(title) {
-    let result = "";
-    this.list.forEach(article => {
-      if (article.title === title) {
-        result = article;
-      }
+    //return this.list;
+    return knex.raw('SELECT * from articles').then(data => {
+      return data.rows; //returning promise object
     });
-    return result;
+  }
+  getArticleByTitle(id) {
+    // let result = '';
+    // this.list.forEach(article => {
+    //   if (article.title === title) {
+    //     result = article;
+    //   }
+    // });
+    // return result;
+    return knex
+      .raw(`SELECT * FROM articles WHERE article_id = ${id}`)
+      .then(data => {
+        // console.log(data, 'data');
+        return data.rows; //returning promise object
+      });
   }
   editArticleByTitle(title, body, author) {
-    let newArticle = {};
+    let updatedArticle = {};
     this.list.forEach(article => {
       if (article.title === title) {
         article.title = newArticle.title;
@@ -33,7 +55,7 @@ class DS_articles {
         newArticle.urlTitle = encodeURIComponent(newArticle.title);
       }
     });
-    return newArticle;
+    return updatedArticle;
   }
   deleteArticleByTitle(title) {
     this.list.forEach((article, index) => {

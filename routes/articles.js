@@ -1,16 +1,33 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 const productList = [];
-const DS_articles = require("../db/articles.js");
-const methodOverride = require("method-override");
+const DS_articles = require('../db/articles.js');
+const methodOverride = require('method-override');
 
-router.get("/", (req, res) => {
-  let articles = DS_articles.getAllArticles();
-  res.render("articlesHome", { articles });
+router.get('/', (req, res) => {
+  console.log('articles route');
+  DS_articles.getAllArticles()
+    .then(articles => {
+      console.log(articles, 'dis is articles');
+      res.render('articlesHome', { articles });
+    })
+    .catch(err => console.log(err, 'ERROR'));
+  // console.log("articles route");
+  // let articles = knex.raw("SELECT * FROM articles");
+  // console.log(articles);
 });
-module.exports = router;
+router.get('/:id', (req, res) => {
+  //retrieved product by ID
+  let articleId = Number(req.params.id);
+  DS_articles.getArticleByTitle(articleId)
+    .then(retrievedArticle => {
+      console.log(retrievedArticle);
+      res.render('articles', { retrievedArticle });
+    })
+    .catch(err => console.log(err, 'ERROR'));
+});
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   let newArticle = req.body;
   console.log(newArticle);
   let newArt = DS_articles.addNewArticle(
@@ -19,16 +36,16 @@ router.post("/", (req, res) => {
     newArticle.author
   );
   console.log(DS_articles.getAllArticles());
-  res.redirect("/articles");
+  res.redirect('/articles');
 });
 
-router.put("/:title", (req, res) => {
+router.put('/:title', (req, res) => {
   let reqTitle = req.params.title;
-  console.log(reqTitle, "reqTitle");
+  console.log(reqTitle, 'reqTitle');
   let foundArticle = DS_articles.getArticleByTitle(reqTitle); //finding article to be replaced
   let reqArticle = req.body; //grabbing put values
-  console.log(foundArticle, "foundArticle");
-  console.log(reqArticle, "reqArticle");
+  console.log(foundArticle, 'foundArticle');
+  console.log(reqArticle, 'reqArticle');
   //   let newArticle = DS_articles.editArticleByTitle(
   //     reqArticle.title,
   //     reqArticle.body,
@@ -39,6 +56,8 @@ router.put("/:title", (req, res) => {
   if (reqArticle.body != foundArticle.body) {
     reqArticle.body = foundArticle.body;
   }
-  console.log(DS_articles.getAllArticles(), "updated article list");
+  console.log(DS_articles.getAllArticles(), 'updated article list');
   res.end();
 });
+module.exports = router;
+//module.exports = knex();

@@ -2,15 +2,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> {{ name }}</title>
+
 </head>
 
 <body>
-    <h1> {{ name }} </h1>
+    {{#retrievedProduct}}
+    <h1> {{ product_name }} </h1>
     <p>Price $</p>
-    <p> {{ price }} </p>
+    <p> {{ product_price }} </p>
     <p> In Stock:</p>
-    <p> {{ inventory }}</p>
-    {{> edit}}
+    <p> {{ product_inventory }}</p>
+    {{> edit}} {{/retrievedProduct}}
     <br> {{> nav}}
 </body>
